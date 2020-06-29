@@ -1202,7 +1202,6 @@ impl SimpleAtlasAllocator {
 
     /// Drop all rectangles, clearing the atlas to its initial state.
     pub fn clear(&mut self) {
-
         for i in 0..NUM_BUCKETS {
             self.free_rects[i].clear();
         }
@@ -1501,7 +1500,11 @@ pub fn dump_svg(atlas: &AtlasAllocator, output: &mut dyn std::io::Write) -> std:
 /// SVG document, so that it can be included in a larger document.
 ///
 /// If a rectange is provided, translate and scale the output to fit it.
-pub fn dump_into_svg(atlas: &AtlasAllocator, rect: Option<&Rectangle>, output: &mut dyn std::io::Write) -> std::io::Result<()> {
+pub fn dump_into_svg(
+    atlas: &AtlasAllocator,
+    rect: Option<&Rectangle>,
+    output: &mut dyn std::io::Write,
+) -> std::io::Result<()> {
     use svg_fmt::*;
 
     let (sx, sy, tx, ty) = if let Some(rect) = rect {
